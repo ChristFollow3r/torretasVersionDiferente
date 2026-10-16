@@ -12,9 +12,10 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private GameObject target;
     
     private InputSystem_Actions input;
-    private Vector2 mInput; 
+    private Vector2 mInput;  // stands for movement input
     private Vector3 cachedPosition;
-    private bool moveB = false;
+    private bool moveB = false; // stands for move bit**
+    private bool fInput = false; // stands for fuc*** input
     private void Awake()
     {
         input = new InputSystem_Actions();
@@ -30,12 +31,14 @@ public class CameraMovement : MonoBehaviour
     {
         //Debug.Log(cachedPosition);
         if (moveB) transform.position = Vector3.Lerp(transform.position, cachedPosition, Time.deltaTime);
+        if (Vector3.Distance(transform.position, cachedPosition) < 2f /*|| fInput*/)  moveB = false; // no se pq no va el fInput se queda comentado
         CameraRotation();
     }
 
     void CameraRotation()
     {
         mInput = input.Player.Move.ReadValue<Vector2>();
+        //fInput = mInput.x > 0.1 || mInput.y > 0.1;
 
         // Y PORQUE ESTA ESTO INVERTIDO ME CAGO EWQRQPIÑYGQWERP8IÑI YFREWQPÑ9YFREQWPOL
         transform.RotateAround(target.transform.position, Vector3.up, -mInput.x * xSpeed * Time.deltaTime);
