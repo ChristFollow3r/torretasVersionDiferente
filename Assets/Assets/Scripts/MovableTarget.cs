@@ -64,7 +64,7 @@ public class MovableTarget : MonoBehaviour
     }
     
     IEnumerator ReenableMeshRenderer()
-    { ;
+    {
         yield return new WaitForSeconds(3);
         meshRenderer.enabled = true;
     }
